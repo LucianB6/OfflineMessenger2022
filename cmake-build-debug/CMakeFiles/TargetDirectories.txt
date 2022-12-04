@@ -1,0 +1,5 @@
+/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/CMakeFiles/server.dir
+/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/CMakeFiles/client.dir
+/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/CMakeFiles/test_table.dir
