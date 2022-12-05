@@ -23,8 +23,8 @@ typedef struct thData{
 }thData;
 
 int i = 0;
-void selectie_optiune(int, int);
-void creare_cont(int, int );
+void selectie_optiune(void *);
+void creare_cont(void *);
 
 static void *treat(void * arg)
 {
@@ -34,7 +34,7 @@ static void *treat(void * arg)
     printf ("[thread]- %d - Conectare cu succes...\n", tdL.idThread);
     fflush (stdout);
     pthread_detach(pthread_self());
-    selectie_optiune(tdL.cl, tdL.idThread);
+    selectie_optiune((struct thData*)arg);
     /* am terminat cu acest client, inchidem conexiunea */
     return(NULL);
 }
@@ -105,7 +105,9 @@ int main ()
 
 }
 
-void creare_cont(int cl, int idThread){
+void creare_cont(void * arg){
+    struct thData tdL;
+    tdL= *((struct thData*)arg);
     char username[20];
     char password[30];
     char user_command[256] = "..Introduce-ti un nume de utilizator..";
@@ -114,11 +116,11 @@ void creare_cont(int cl, int idThread){
     bzero(username, 20);
     bzero(password, 30);
 
-    if(write(cl, user_command, 256) <= 0 ){
+    if(write(tdL.cl, user_command, 256) <= 0 ){
         perror("[server] Eroare la write in user_command");
     }
 
-    if(read(cl, username, 20) <= 0)
+    if(read(tdL.cl, username, 20) <= 0)
     {
         perror("[server] Eroare citire username de la client.\n");
         exit(1);
@@ -127,11 +129,11 @@ void creare_cont(int cl, int idThread){
     username[strlen(username) - 1] = '\0';
     printf("Username: %s\n", username);
 
-    if(write(cl, password_command, 256) <= 0 ){
+    if(write(tdL.cl, password_command, 256) <= 0 ){
         perror("[server] Eroare la write in user_command");
     }
 
-    if(read(cl, password, 30) <= 0)
+    if(read(tdL.cl, password, 30) <= 0)
     {
         perror("[server] Eroare citire username de la client.\n");
         exit(1);
@@ -142,9 +144,10 @@ void creare_cont(int cl, int idThread){
     // de verificat cu baza de date pentru maine
 }
 
-void selectie_optiune(int cl, int idThread){
+void selectie_optiune(void * arg){
 
     struct thData tdL;
+    tdL= *((struct thData*)arg);
     char optiune[15];
     char comenzi[1024] = "Scrieti comanda pe care doriti sa o alegeti \n"
                         "1. Logare "
@@ -153,25 +156,26 @@ void selectie_optiune(int cl, int idThread){
     char avertizare[128] = "Optiunea aleasa nu este buna!";
 //    printf("Am ajuns in verificarea optiunii alese\n");
 
-    if (write(cl, comenzi, 1024) <= 0){
-        printf("[Thread %d] ",idThread);
+    if (write(tdL.cl, comenzi, 1024) <= 0){
+        printf("[Thread %d] ",tdL.idThread);
         perror ("[Thread]Eroare la write().\n");
     }
 
-    while (read(cl, optiune, 15) ){
+    while (read(tdL.cl, optiune, 15) ){
         if(strcmp(optiune, "Inregistrare") == 0){
             printf("%s\n", optiune);
-            creare_cont(cl, idThread);
+            creare_cont((struct thData*)arg);
+        }
+        else if(strcmp(optiune, "Logare") == 0){
+        printf("[Thread %d]Utilizatorul a ales %s\n", tdL.idThread, optiune);
         } else{
             printf("Optiunea aleasa nu este buna\n");
-            write(cl, avertizare, 128);
+            write(tdL.cl, avertizare, 128);
         }
 
     }
 //
-//    if(strcmp(optiune, "Logare") == 0){
-//        printf("[Thread %d]Utilizatorul a ales %s\n", idThread, optiune);
-//    }
+
 //
 //    else if(strcmp(optiune, "Inregistrare") == 0) {
 //        printf("[Thread %d]Utilizatorul a ales %s\n", idThread, optiune);
