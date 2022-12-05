@@ -12,41 +12,52 @@ extern int errno;
 
 /* portul de conectare la server*/
 int port;
-
+//
 void creare_cont(int sd){
     char username[20];
     char password[20];
-    char validare_user[20];
+    char user_command[256];
+    char password_command[256];
 
-    printf("Va rugam sa selectati un username\n");
+    if(read(sd, user_command, 256) <= 0){
+        perror("[client]Eroare la read in user_command");
+    }
+    printf("%s\n", user_command);
+
     bzero(username, 20);
+    read(0, username, 20);
 
-    scanf("%29s", username);
-    printf("%s\n", username);
-    strtok(username, "\n");
+    fflush(stdout);
 
-    if(write(sd, username, 20) <= 0){
-        perror("[client]Eroare la read in password");
+    if(write(sd, username, 20) <= 0)
+    {
+        perror("[client]Eroare la scriere spre server.\n");
+        return;
     }
 
-    printf("Va rugam sa selectati o parola\n");
-    bzero(password, 20);
-    read(0, password, sizeof(password));
+    if(read(sd, password_command, 256) <= 0){
+        perror("[client]Eroare la read in user_command");
+    }
+    printf("%s\n", password_command);
 
-    if(write(sd, password, 100) <= 0){
-        perror("[client]Eroare la read in password");
+    bzero(password, 20);
+    read(0, password, 20);
+
+    fflush(stdout);
+
+    if(write(sd, password, 20) <= 0)
+    {
+        perror("[client]Eroare la scriere spre server.\n");
+        return;
     }
 }
 
 int main (int argc, char *argv[]) {
     int sd;
     struct sockaddr_in server;    // structura folosita pentru conectare
-    char optiune[15];
-    char pass[256];
-    int val;
-    int contor;
-    char validare[100];
+    char optiune[1024];
     char selectie[15];
+    char avertizare[128];
     /* exista toate argumentele in linia de comanda? */
     if (argc != 3) {
         printf("Sintaxa: %s <adresa_server> <port>\n", argv[0]);
@@ -69,43 +80,31 @@ int main (int argc, char *argv[]) {
         perror("[client]Eroare la connect().\n");
         return errno;
     }
-    printf("Scrieti comanda pe care doriti s-o accesati \n");
-    printf("1. Logare  ");
-    printf("2. Inregistrare  ");
-    printf("3. Iesire  \n");
 
-    bzero(optiune, 15);
-    read(0, optiune, sizeof(optiune));
-    strtok(optiune, "\n");
-
-    if (write(sd, optiune, 100) <= 0) {
+    if (read(sd, optiune, 1024) < 0) {
         perror("[client] Eroare la write din optiune");
     }
-    if (strcmp(optiune, "Inregistrare") <= 0) {
-//            creare_cont(sd);
-        if (read(sd, &validare, 100) <= 0) {
-            perror("[client]Eroare la read in validare");
-            }
-        printf("%s \n", validare);
-//        creare_cont(sd);
+    printf("%s\n", optiune);
 
-        char username[20];
-        char password[20];
-        char validare_user[20];
+    while (read(0, selectie, 15)) {
+        selectie[strlen(selectie) - 1] = '\0';
 
-        printf("Va rugam sa selectati un username\n");
+        fflush(stdout);
+        write(sd, selectie, 15);
 
-        bzero(username, 20);
-        strtok(username, "\n");
-        read(0, username, 20);
-
-        if(write(sd, username, 20) <= 0){
-            perror("[client]Eroare la read in password");
+        if (strcmp(selectie, "Inregistrare") == 0) {
+            printf("Ati selectat %s \n", selectie);
+            creare_cont(sd);
         }
-
-
-
+        else if (strcmp(selectie, "Logare") == 0) {
+            printf("Ati selectat %s \n", selectie);
+            creare_cont(sd);
         }
+        else {
+            read(sd, avertizare, 128);
+            printf("%s\n", avertizare);
+        }
+    }
 
     }
 //
