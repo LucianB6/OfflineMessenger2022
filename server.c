@@ -25,6 +25,7 @@ typedef struct thData{
 int i = 0;
 void selectie_optiune(void *);
 void creare_cont(void *);
+void logare(void *);
 void optiuni_pentru_utilizator(void *);
 
 static void *treat(void * arg)
@@ -110,8 +111,7 @@ void optiuni_pentru_utilizator(void * arg){
     struct thData tdL;
     tdL= *((struct thData*)arg);
     char nr_optiune[5];
-    char optiuni_noi[1024] = "Salu"
-                            "Scrieti numarul corespunzator optiunii dorite \n"
+    char optiuni_noi[1024] ="Scrieti numarul corespunzator optiunii dorite \n"
                             "1. Vizualizare mesaje primite \n"
                             "2. Vizualizati oamenii activi in retea\n"
                             "3. Trimite mesaj";
@@ -155,13 +155,12 @@ void creare_cont(void * arg){
     char password[30];
     char user_command[256] = "..Introduce-ti un nume de utilizator..";
     char password_command[256] = "..Introduce-ti o parola de utilizator..";
+    char aver = "1";
 
     bzero(username, 20);
     bzero(password, 30);
-    char avertizare[256] = "Userul este deja in baza de date";
 
     int ok = 0;
-
 
     if(write(tdL.cl, user_command, 256) <= 0 ){
         perror("[server] Eroare la write in user_command");
@@ -172,8 +171,6 @@ void creare_cont(void * arg){
         exit(1);
     }
     username[strlen(username) - 1] = '\0';
-
-    printf("Username: %s\n", username);
 
 
     if(write(tdL.cl, password_command, 256) <= 0 ){
@@ -192,28 +189,124 @@ void creare_cont(void * arg){
     rc = sqlite3_prepare_v2(db, "SELECT * from mess ;", -1, &res, 0);
 
     char *nume;
-    char aver[4] = "1";
+
     while (sqlite3_step(res) != SQLITE_DONE) {
         nume = sqlite3_column_text(res, 1);
-        printf("%s\n", nume);
 
         if (strcmp(username, nume) == 0) {
             printf("User deja existent\n");
-            write(tdL.cl, aver, 4);
+            write(tdL.cl, aver, sizeof(char ));
             creare_cont((struct thData*) arg);
         }
     }
 
     sqlite3_finalize(res);
-    sqlite3_close(db);
 
     printf("Username: %s\n", username);
     printf("Password: %s\n", password);
     printf("Contul a fost verificat si aprobat \n");
-    // de verificat cu baza de date pentru maine
+
+    sqlite3_stmt *stmt;
+    int online = 1;
+
+    char *sql = "INSERT INTO mess (username, password, online) VALUES (?1, ?2, ?3);";
+
+    sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+
+    sqlite3_bind_text(stmt, 1, username, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, password, -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 3, online);
+    sqlite3_step(stmt);
     optiuni_pentru_utilizator((struct thData *) arg);
+
+    sqlite3_close(db);
 }
 
+void logare(void * arg){
+    struct thData tdL;
+    tdL= *((struct thData*)arg);
+
+    sqlite3 *db;
+    char *err_msg = 0;
+    sqlite3_stmt *res;
+
+    int rc = sqlite3_open("../test.db", &db);
+
+    if (rc != SQLITE_OK) {
+
+        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        exit(1);
+    }
+
+    char username[20];
+    char password[30];
+    char user_command[256] = "....Introduce-ti numele de utilizator....";
+    char password_command[256] = "....Introduce-ti parola de utilizator....";
+
+    bzero(username, 20);
+    bzero(password, 30);
+
+
+    if(write(tdL.cl, user_command, 256) <= 0 ){
+        perror("[server] Eroare la write in user_command");
+    }
+
+    if (read(tdL.cl, username, 20) <= 0) {
+        perror("[server] Eroare citire username de la client.\n");
+        exit(1);
+    }
+    username[strlen(username) - 1] = '\0';
+
+
+    if(write(tdL.cl, password_command, 256) <= 0 ){
+        perror("[server] Eroare la write in user_command");
+    }
+
+    if(read(tdL.cl, password, 30) <= 0)
+    {
+        perror("[server] Eroare citire username de la client.\n");
+        exit(1);
+    }
+
+
+    password[strlen(password) - 1] = '\0';
+
+    rc = sqlite3_prepare_v2(db, "SELECT * from mess ;", -1, &res, 0);
+
+    char *nume;
+    char *parola;
+    int ok = 0;
+    char aver[10] = "1";
+    int online = 1;
+    while (sqlite3_step(res) != SQLITE_DONE) {
+        nume = sqlite3_column_text(res, 1);
+        parola = sqlite3_column_text(res, 2);
+        if (strcmp(username, nume) == 0 && strcmp(password, parola) == 0) {
+            printf("Logarea s-a efectuat cu succes\n");
+            write(tdL.cl, aver, 10);
+
+            sqlite3_stmt *stmt;
+
+            char *sql = "INSERT INTO mess (online) VALUES (?1) WHERE username=?2 and password = ?3;";
+
+            sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+
+            sqlite3_bind_int(stmt, 1, online);
+            sqlite3_bind_text(stmt, 2, username, -1, SQLITE_STATIC);
+            sqlite3_bind_text(stmt, 3, password, -1, SQLITE_STATIC);
+            sqlite3_step(stmt);
+
+            optiuni_pentru_utilizator((struct thData *) arg);
+        }
+    }
+
+    sqlite3_finalize(res);
+
+    logare((struct thData *) arg);
+
+    sqlite3_close(db);
+}
 
 void selectie_optiune(void * arg){
 
@@ -238,21 +331,17 @@ void selectie_optiune(void * arg){
             creare_cont((struct thData*)arg);
         }
         else if(strcmp(optiune, "Logare") == 0){
-        printf("[Thread %d]Utilizatorul a ales %s\n", tdL.idThread, optiune);
-        } else{
+            printf("[Thread %d]Utilizatorul a ales %s\n", tdL.idThread, optiune);
+            logare((struct thData*)arg);
+        }
+        else if(strcmp(optiune, "Iesire") == 0){
+            printf("[Thread %d]Utilizatorul a ales %s\n", tdL.idThread, optiune);
+            exit(1);
+        }
+        else {
             printf("Optiunea aleasa nu este buna\n");
             write(tdL.cl, avertizare, 128);
         }
 
     }
-//
-
-//
-//    else if(strcmp(optiune, "Inregistrare") == 0) {
-//        printf("[Thread %d]Utilizatorul a ales %s\n", idThread, optiune);
-//        strcpy(validare, "S-a validat optiunea");
-//        write(cl, validare, 30);
-//        creare_cont(cl, idThread);
-//
-//    }
 }

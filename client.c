@@ -21,7 +21,6 @@ void optiuni_pentru_utilizator(int sd) {
     if (read(sd, optiuni, 1024) <= 0) {
         perror("[client] Eroare la read in optiuni");
     }
-    printf("\n");
     printf("%s \n", optiuni);
 
     while (read(0, optiune_dorita, 5)) {
@@ -38,6 +37,8 @@ void optiuni_pentru_utilizator(int sd) {
         }
         else if (strcmp(optiune_dorita, "3") == 0) {
             printf("Ati selectat %s: trimitere mesaj \n", optiune_dorita);
+        } else{
+            printf("Nu exista optiunea aleasa, selectati altceva");
         }
     }
 }
@@ -52,7 +53,7 @@ void creare_cont(int sd){
     }
     printf("%s\n", user_command);
     char avertizareClient[256] = "Userul este deja in baza de date";
-    char avertizare[256];
+    char avertizare[1];
     bzero(username, 20);
     read(0, username, 20);
 
@@ -79,13 +80,66 @@ void creare_cont(int sd){
         return;
     }
 
-    if(read(sd, avertizare, 4) <= 0){
+    if( read(sd, avertizare, 1) <= 0){
         perror("[client] Eroare la read in avertizare\n");
     }
+
     if(strcmp(avertizare,"1") == 0){
+        printf("Nume de utilizator indisponibil \n");
         creare_cont(sd);
     } else {
+        printf("S");
         optiuni_pentru_utilizator(sd);
+    }
+}
+
+void logare(int sd){
+    char username[20];
+    char password[20];
+    char user_command[256];
+    char password_command[256];
+
+    if(read(sd, user_command, 256) <= 0){
+        perror("[client]Eroare la read in user_command");
+    }
+    printf("%s\n", user_command);
+    char avertizare[1];
+
+    bzero(username, 20);
+    read(0, username, 20);
+
+    fflush(stdout);
+    int ok = 0;
+    if (write(sd, username, 20) <= 0) {
+        perror("[client] Eroare la write in username");
+    }
+
+
+    if(read(sd, password_command, 256) <= 0){
+        perror("[client]Eroare la read in user_command");
+    }
+    printf("%s\n", password_command);
+
+    bzero(password, 20);
+    read(0, password, 20);
+
+    fflush(stdout);
+
+    if(write(sd, password, 20) <= 0)
+    {
+        perror("[client]Eroare la scriere spre server.\n");
+        return;
+    }
+
+    if(read(sd, avertizare, 1) <= 0){
+        perror("[client] Eroare la read in avertizare\n");
+    }
+
+    if(strcmp(avertizare,"1") == 0){
+        printf("Logarea s-a efectuat cu succes \n");
+        optiuni_pentru_utilizator(sd);
+    } else {
+        logare(sd);
     }
 }
 
@@ -135,7 +189,7 @@ int main (int argc, char *argv[]) {
         }
         else if (strcmp(selectie, "Logare") == 0) {
             printf("Ati selectat %s \n", selectie);
-            creare_cont(sd);
+            logare(sd);
         }
         else {
             read(sd, avertizare, 128);
