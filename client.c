@@ -13,6 +13,34 @@ extern int errno;
 /* portul de conectare la server*/
 int port;
 //
+
+void optiuni_pentru_utilizator(int sd) {
+    char optiuni[1024];
+    char optiune_dorita[5];
+
+    if (read(sd, optiuni, 1024) <= 0) {
+        perror("[client] Eroare la read in optiuni");
+    }
+    printf("\n");
+    printf("%s \n", optiuni);
+
+    while (read(0, optiune_dorita, 5)) {
+        optiune_dorita[strlen(optiune_dorita) - 1] = '\0';
+
+        fflush(stdout);
+        write(sd, optiune_dorita, 15);
+
+        if (strcmp(optiune_dorita, "1") == 0) {
+            printf("Ati selectat %s: vizualizare mesaje \n", optiune_dorita);
+        }
+        else if (strcmp(optiune_dorita, "2") == 0) {
+            printf("Ati selectat %s: vizualizare oameni activi \n", optiune_dorita);
+        }
+        else if (strcmp(optiune_dorita, "3") == 0) {
+            printf("Ati selectat %s: trimitere mesaj \n", optiune_dorita);
+        }
+    }
+}
 void creare_cont(int sd){
     char username[20];
     char password[20];
@@ -23,17 +51,17 @@ void creare_cont(int sd){
         perror("[client]Eroare la read in user_command");
     }
     printf("%s\n", user_command);
-
+    char avertizareClient[256] = "Userul este deja in baza de date";
+    char avertizare[256];
     bzero(username, 20);
     read(0, username, 20);
 
     fflush(stdout);
-
-    if(write(sd, username, 20) <= 0)
-    {
-        perror("[client]Eroare la scriere spre server.\n");
-        return;
+    int ok = 0;
+    if (write(sd, username, 20) <= 0) {
+        perror("[client] Eroare la write in username");
     }
+
 
     if(read(sd, password_command, 256) <= 0){
         perror("[client]Eroare la read in user_command");
@@ -49,6 +77,15 @@ void creare_cont(int sd){
     {
         perror("[client]Eroare la scriere spre server.\n");
         return;
+    }
+
+    if(read(sd, avertizare, 4) <= 0){
+        perror("[client] Eroare la read in avertizare\n");
+    }
+    if(strcmp(avertizare,"1") == 0){
+        creare_cont(sd);
+    } else {
+        optiuni_pentru_utilizator(sd);
     }
 }
 

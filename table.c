@@ -17,7 +17,7 @@ int main(void) {
     }
 
     char *sql = "DROP TABLE IF EXISTS mess;"
-                "CREATE TABLE mess(id INT PRIMARY KEY,username TEXT,password TEXT, mesaj TEXT);";
+                "CREATE TABLE mess(id INT PRIMARY KEY ,username TEXT,password TEXT, mesaj TEXT);";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
