@@ -40,6 +40,29 @@ include CMakeFiles/rules.ninja
 # Logical path to working directory; prefix for absolute paths.
 
 cmake_ninja_workdir = /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug && /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022 -B/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug && /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
 # =============================================================================
 # Object build statements for EXECUTABLE target server
 
@@ -54,8 +77,6 @@ build CMakeFiles/server.dir/server.c.o: C_COMPILER__server_Debug /home/lucian/CL
   FLAGS = -g -std=gnu99
   OBJECT_DIR = CMakeFiles/server.dir
   OBJECT_FILE_DIR = CMakeFiles/server.dir
-  TARGET_COMPILE_PDB = CMakeFiles/server.dir/
-  TARGET_PDB = server.pdb
 
 
 # =============================================================================
@@ -71,9 +92,8 @@ build server: C_EXECUTABLE_LINKER__server_Debug CMakeFiles/server.dir/server.c.o
   OBJECT_DIR = CMakeFiles/server.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/server.dir/
   TARGET_FILE = server
-  TARGET_PDB = server.pdb
+  TARGET_PDB = server.dbg
 
 # =============================================================================
 # Object build statements for EXECUTABLE target client
@@ -89,8 +109,6 @@ build CMakeFiles/client.dir/client.c.o: C_COMPILER__client_Debug /home/lucian/CL
   FLAGS = -g -std=gnu99
   OBJECT_DIR = CMakeFiles/client.dir
   OBJECT_FILE_DIR = CMakeFiles/client.dir
-  TARGET_COMPILE_PDB = CMakeFiles/client.dir/
-  TARGET_PDB = client.pdb
 
 
 # =============================================================================
@@ -105,67 +123,72 @@ build client: C_EXECUTABLE_LINKER__client_Debug CMakeFiles/client.dir/client.c.o
   OBJECT_DIR = CMakeFiles/client.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/client.dir/
   TARGET_FILE = client
-  TARGET_PDB = client.pdb
-
-
-#############################################
-# Utility command for edit_cache
-
-build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug && /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build edit_cache: phony CMakeFiles/edit_cache.util
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug && /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022 -B/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+  TARGET_PDB = client.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target test_table
+# Object build statements for EXECUTABLE target test_table_users
 
 
 #############################################
-# Order-only phony target for test_table
+# Order-only phony target for test_table_users
 
-build cmake_object_order_depends_target_test_table: phony || CMakeFiles/test_table.dir
+build cmake_object_order_depends_target_test_table_users: phony || CMakeFiles/test_table_users.dir
 
-build CMakeFiles/test_table.dir/table.c.o: C_COMPILER__test_table_Debug /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/table.c || cmake_object_order_depends_target_test_table
-  DEP_FILE = CMakeFiles/test_table.dir/table.c.o.d
+build CMakeFiles/test_table_users.dir/users.c.o: C_COMPILER__test_table_users_Debug /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/users.c || cmake_object_order_depends_target_test_table_users
+  DEP_FILE = CMakeFiles/test_table_users.dir/users.c.o.d
   FLAGS = -g -std=gnu99
-  OBJECT_DIR = CMakeFiles/test_table.dir
-  OBJECT_FILE_DIR = CMakeFiles/test_table.dir
-  TARGET_COMPILE_PDB = CMakeFiles/test_table.dir/
-  TARGET_PDB = test_table.pdb
+  OBJECT_DIR = CMakeFiles/test_table_users.dir
+  OBJECT_FILE_DIR = CMakeFiles/test_table_users.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target test_table
+# Link build statements for EXECUTABLE target test_table_users
 
 
 #############################################
-# Link the executable test_table
+# Link the executable test_table_users
 
-build test_table: C_EXECUTABLE_LINKER__test_table_Debug CMakeFiles/test_table.dir/table.c.o
+build test_table_users: C_EXECUTABLE_LINKER__test_table_users_Debug CMakeFiles/test_table_users.dir/users.c.o
   FLAGS = -g
   LINK_LIBRARIES = -lsqlite3
-  OBJECT_DIR = CMakeFiles/test_table.dir
+  OBJECT_DIR = CMakeFiles/test_table_users.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/test_table.dir/
-  TARGET_FILE = test_table
-  TARGET_PDB = test_table.pdb
+  TARGET_FILE = test_table_users
+  TARGET_PDB = test_table_users.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test_table_mess
+
+
+#############################################
+# Order-only phony target for test_table_mess
+
+build cmake_object_order_depends_target_test_table_mess: phony || CMakeFiles/test_table_mess.dir
+
+build CMakeFiles/test_table_mess.dir/mesaje.c.o: C_COMPILER__test_table_mess_Debug /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/mesaje.c || cmake_object_order_depends_target_test_table_mess
+  DEP_FILE = CMakeFiles/test_table_mess.dir/mesaje.c.o.d
+  FLAGS = -g -std=gnu99
+  OBJECT_DIR = CMakeFiles/test_table_mess.dir
+  OBJECT_FILE_DIR = CMakeFiles/test_table_mess.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_table_mess
+
+
+#############################################
+# Link the executable test_table_mess
+
+build test_table_mess: C_EXECUTABLE_LINKER__test_table_mess_Debug CMakeFiles/test_table_mess.dir/mesaje.c.o
+  FLAGS = -g
+  LINK_LIBRARIES = -lsqlite3
+  OBJECT_DIR = CMakeFiles/test_table_mess.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test_table_mess
+  TARGET_PDB = test_table_mess.dbg
 
 # =============================================================================
 # Target aliases.
@@ -178,7 +201,7 @@ build test_table: C_EXECUTABLE_LINKER__test_table_Debug CMakeFiles/test_table.di
 #############################################
 # Folder: /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug
 
-build all: phony server client test_table
+build all: phony server client test_table_users test_table_mess
 
 # =============================================================================
 # Built-in targets
@@ -187,14 +210,14 @@ build all: phony server client test_table
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCCompiler.cmake.in /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCCompilerABI.c /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCompilerIdDetection.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompileFeatures.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompilerABI.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompilerId.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineSystem.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeFindBinUtils.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeParseImplicitIncludeInfo.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeParseImplicitLinkInfo.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeParseLibraryArchitecture.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystem.cmake.in /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeTestCCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeTestCompilerCommon.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Borland-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Clang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Cray-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GHS-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-FindBinUtils.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/HP-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/IAR-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Intel-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/PGI-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ROCMClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/SCO-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/TI-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/XL-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/zOS-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Internal/FeatureTesting.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCCompiler.cmake.in /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCCompilerABI.c /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCompilerIdDetection.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompileFeatures.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompilerABI.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineCompilerId.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeDetermineSystem.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeFindBinUtils.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeParseImplicitIncludeInfo.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeParseImplicitLinkInfo.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeParseLibraryArchitecture.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystem.cmake.in /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeTestCCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeTestCompilerCommon.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Borland-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Clang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Cray-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GHS-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-FindBinUtils.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/HP-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/IAR-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Intel-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/PGI-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/ROCMClang-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/SCO-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/TI-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/XL-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/zOS-C-DetermineCompiler.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Internal/FeatureTesting.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake: phony
+build ../CMakeLists.txt /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake: phony
 
 
 #############################################

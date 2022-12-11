@@ -14,6 +14,38 @@ extern int errno;
 int port;
 //
 
+void inserare_mesaj(int sd){
+    printf("Am ajuns\n");
+}
+
+void trimitere_mesaj(int sd) {
+    char utilizator_trimitere[1024];
+    char utilizator[1024];
+    char aprobare[10];
+
+    if (read(sd, utilizator_trimitere, 1024) <= 0) {
+        perror("[client] Eroare la read in optiuni");
+    }
+    printf("%s \n", utilizator_trimitere);
+    char confirmare[10] = "Da";
+
+    while (read(0, utilizator, 100)) {
+        utilizator[strlen(utilizator) - 1] = '\0';
+
+        fflush(stdout);
+        write(sd, utilizator, 100);
+
+        if (read(sd, aprobare, 10) <= 0) {
+            perror("Eroare la read");
+        }
+        confirmare[strlen(confirmare) - 1] = '\0';
+        printf("%s", confirmare);
+        if (strcmp(confirmare, aprobare) == 0) {
+            printf("A-ti inserat numele corect");
+        }
+    }
+}
+
 void optiuni_pentru_utilizator(int sd) {
     char optiuni[1024];
     char optiune_dorita[5];
@@ -27,7 +59,7 @@ void optiuni_pentru_utilizator(int sd) {
         optiune_dorita[strlen(optiune_dorita) - 1] = '\0';
 
         fflush(stdout);
-        write(sd, optiune_dorita, 15);
+        write(sd, optiune_dorita, 5);
 
         if (strcmp(optiune_dorita, "1") == 0) {
             printf("Ati selectat %s: vizualizare mesaje \n", optiune_dorita);
@@ -37,9 +69,12 @@ void optiuni_pentru_utilizator(int sd) {
         }
         else if (strcmp(optiune_dorita, "3") == 0) {
             printf("Ati selectat %s: trimitere mesaj \n", optiune_dorita);
-        } else{
-            printf("Nu exista optiunea aleasa, selectati altceva");
+            trimitere_mesaj(sd);
         }
+        else if (strcmp(optiune_dorita, "4") == 0){
+            printf("Ati selectat %s: iesire din aplicatie\n", optiune_dorita);
+            exit(1);
+        } else printf("Optiunea nu este disponibila!\n");
     }
 }
 void creare_cont(int sd){
@@ -103,7 +138,7 @@ void logare(int sd){
         perror("[client]Eroare la read in user_command");
     }
     printf("%s\n", user_command);
-    char avertizare[1];
+    char avertizare[10];
 
     bzero(username, 20);
     read(0, username, 20);
@@ -131,11 +166,11 @@ void logare(int sd){
         return;
     }
 
-    if(read(sd, avertizare, 1) <= 0){
+    if(read(sd, avertizare, 10) <= 0){
         perror("[client] Eroare la read in avertizare\n");
     }
 
-    if(strcmp(avertizare,"1") == 0){
+    if(strcmp(avertizare, "1") == 0){
         printf("Logarea s-a efectuat cu succes \n");
         optiuni_pentru_utilizator(sd);
     } else {

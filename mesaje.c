@@ -6,7 +6,7 @@ int main(void) {
     sqlite3 *db;
     char *err_msg = 0;
 
-    int rc = sqlite3_open("../test.db", &db);
+    int rc = sqlite3_open("../mess.db", &db);
 
     if (rc != SQLITE_OK) {
 
@@ -16,8 +16,8 @@ int main(void) {
         return 1;
     }
 
-    char *sql = "DROP TABLE IF EXISTS users;"
-                "CREATE TABLE users(username TEXT,password TEXT, online TEXT);";
+    char *sql = "DROP TABLE IF EXISTS mess;"
+                "CREATE TABLE mess(username_send TEXT, username_recv TEXT, message TEXT);";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 

@@ -17,7 +17,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -34,7 +35,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -50,15 +52,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-Debug-5a1ab446958bec25be14.json",
+					"jsonFile" : "target-server-Debug-0da086ec6b92ad8b2961.json",
 					"name" : "server",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "test_table::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-test_table-Debug-0238d38bee5a9ceb2d48.json",
-					"name" : "test_table",
+					"id" : "test_table_mess::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_table_mess-Debug-6c6a262463de6c792ced.json",
+					"name" : "test_table_mess",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_table_users::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_table_users-Debug-e434d26a037eb6c41c61.json",
+					"name" : "test_table_users",
 					"projectIndex" : 0
 				}
 			]

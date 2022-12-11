@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test_table"
+			"path" : "test_table_users"
 		}
 	],
 	"backtrace" : 1,
@@ -31,7 +31,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 17,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -63,7 +63,7 @@
 			]
 		}
 	],
-	"id" : "test_table::@6890427a1f51a3e7e1df",
+	"id" : "test_table_users::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -84,8 +84,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "test_table",
-	"nameOnDisk" : "test_table",
+	"name" : "test_table_users",
+	"nameOnDisk" : "test_table_users",
 	"paths" : 
 	{
 		"build" : ".",
@@ -106,7 +106,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "table.c",
+			"path" : "users.c",
 			"sourceGroupIndex" : 0
 		}
 	],

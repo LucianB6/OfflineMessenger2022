@@ -10,8 +10,12 @@ add_executable(server
 add_executable(client
                client.c)
 
-add_executable(test_table table.c)
+add_executable(test_table_users users.c)
+
+add_executable(test_table_mess mesaje.c)
 
 target_link_libraries(server pthread sqlite3)
 
-target_link_libraries(test_table sqlite3)
+target_link_libraries(test_table_users sqlite3)
+target_link_libraries(test_table_mess sqlite3)
+
