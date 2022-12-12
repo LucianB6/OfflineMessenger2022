@@ -18,6 +18,7 @@ void inserare_mesaj(int);
 void trimitere_mesaj(int);
 void optiuni_pentru_utilizator(int);
 void vizualizare_mesaj(int);
+void meniu(int);
 
 
 void inserare_mesaj(int sd){
@@ -41,13 +42,16 @@ void inserare_mesaj(int sd){
             printf("Ve-ti fi redirectionat in meniul de optiuni!\n");
             optiuni_pentru_utilizator(sd);
         }
+        mesaj_nou[0] = '\0';
 
     }
 }
 
 void trimitere_mesaj(int sd) {
     char utilizator_trimitere[1024];
+    bzero(utilizator_trimitere, 1024);
     char utilizator[1024];
+    bzero(utilizator, 1024);
     char aprobare[10];
 
     if (read(sd, utilizator_trimitere, 1024) <= 0) {
@@ -76,7 +80,9 @@ void trimitere_mesaj(int sd) {
 
 void vizualizare_mesaj(int sd){
     char mesaje_nevazute[10000];
+    bzero(mesaje_nevazute, 10000);
     char optiune_noua[24];
+    bzero(optiune_noua, 24);
 
     if(read(sd, mesaje_nevazute, 10000) < 0){
         perror("[client]Eroare la mesaj nevazut in read");
@@ -105,7 +111,9 @@ void vizualizare_mesaj(int sd){
 }
 void optiuni_pentru_utilizator(int sd) {
     char optiuni[1024];
+    bzero(optiuni, 1024);
     char optiune_dorita[10];
+    bzero(optiune_dorita, 10);
     char nr[10] = "3";
 
     if (read(sd, optiuni, 1024) <= 0) {
@@ -125,6 +133,7 @@ void optiuni_pentru_utilizator(int sd) {
         }
         else if (strcmp(optiune_dorita, "2") == 0) {
             printf("Ati selectat %s: vizualizare oameni activi \n", optiune_dorita);
+            meniu(sd);
         }
         else if (strcmp(optiune_dorita, "3") == 0) {
             printf("Ati selectat %s: trimitere mesaj \n", optiune_dorita);
@@ -133,6 +142,7 @@ void optiuni_pentru_utilizator(int sd) {
         else if (strcmp(optiune_dorita, "4") == 0){
             printf("Ati selectat %s: iesire din aplicatie\n", optiune_dorita);
             close(sd);
+            exit(1);
         } else
             printf("Optiunea nu este disponibila!\n");
     }
@@ -149,6 +159,7 @@ void creare_cont(int sd){
     printf("%s\n", user_command);
     char avertizareClient[256] = "Userul este deja in baza de date";
     char avertizare[1];
+
     bzero(username, 20);
     read(0, username, 20);
 
@@ -190,21 +201,26 @@ void creare_cont(int sd){
 
 void logare(int sd){
     char username[20];
+    bzero(username, 20);
     char password[20];
+    bzero(password, 20);
     char user_command[256];
+    bzero(user_command, 256);
     char password_command[256];
+    bzero(password_command, 256);
 
     if(read(sd, user_command, 256) <= 0){
         perror("[client]Eroare la read in user_command");
     }
     printf("%s\n", user_command);
-    char avertizare[10];
+    char avertizareClient[256] = "Userul este deja in baza de date";
+    char avertizare[1];
 
-    bzero(username, 20);
     read(0, username, 20);
 
     fflush(stdout);
     int ok = 0;
+
     if (write(sd, username, 20) <= 0) {
         perror("[client] Eroare la write in username");
     }
@@ -215,7 +231,6 @@ void logare(int sd){
     }
     printf("%s\n", password_command);
 
-    bzero(password, 20);
     read(0, password, 20);
 
     fflush(stdout);
@@ -223,27 +238,62 @@ void logare(int sd){
     if(write(sd, password, 20) <= 0)
     {
         perror("[client]Eroare la scriere spre server.\n");
-        return;
     }
 
-    if(read(sd, avertizare, 10) <= 0){
+    if( read(sd, avertizare, 1) <= 0){
         perror("[client] Eroare la read in avertizare\n");
     }
 
-    if(strcmp(avertizare, "1") == 0){
-        printf("Logarea s-a efectuat cu succes \n");
+    if(strcmp(avertizare,"1") != 0){
+        printf("Nume de utilizator disponibil si parola disp\n");
         optiuni_pentru_utilizator(sd);
     } else {
+        printf("S");
         logare(sd);
     }
 }
 
+void meniu(int sd){
+
+    char optiune[1024];
+    bzero(optiune, 1024);
+    char selectie[15];
+    bzero(selectie, 1024);
+    char avertizare[128];
+
+    if (read(sd, optiune, 1024) < 0) {
+        perror("[client] Eroare la write din optiune");
+    }
+    printf("%s\n", optiune);
+
+    while (read(0, selectie, 15)) {
+        selectie[strlen(selectie) - 1] = '\0';
+
+        fflush(stdout);
+        write(sd, selectie, 15);
+
+        if (strcmp(selectie, "Inregistrare") == 0) {
+            printf("Ati selectat %s \n", selectie);
+            creare_cont(sd);
+        }
+        else if (strcmp(selectie, "Logare") == 0) {
+            printf("Ati selectat %s \n", selectie);
+            logare(sd);
+        }
+        else if (strcmp(selectie, "Iesire") == 0) {
+            printf("Ati selectat %s \n", selectie);
+            exit(1);
+        }
+        else {
+            read(sd, avertizare, 128);
+            printf("%s\n", avertizare);
+        }
+    }
+}
 int main (int argc, char *argv[]) {
     int sd;
     struct sockaddr_in server;    // structura folosita pentru conectare
-    char optiune[1024];
-    char selectie[15];
-    char avertizare[128];
+
     /* exista toate argumentele in linia de comanda? */
     if (argc != 3) {
         printf("Sintaxa: %s <adresa_server> <port>\n", argv[0]);
@@ -267,32 +317,8 @@ int main (int argc, char *argv[]) {
         return errno;
     }
 
-    if (read(sd, optiune, 1024) < 0) {
-        perror("[client] Eroare la write din optiune");
-    }
-    printf("%s\n", optiune);
-
-    while (read(0, selectie, 15)) {
-        selectie[strlen(selectie) - 1] = '\0';
-
-        fflush(stdout);
-        write(sd, selectie, 15);
-
-        if (strcmp(selectie, "Inregistrare") == 0) {
-            printf("Ati selectat %s \n", selectie);
-            creare_cont(sd);
-        }
-        else if (strcmp(selectie, "Logare") == 0) {
-            printf("Ati selectat %s \n", selectie);
-            logare(sd);
-        }
-        else {
-            read(sd, avertizare, 128);
-            printf("%s\n", avertizare);
-        }
-    }
-
-    }
+    meniu(sd);
+}
 //
 // Created by lucian on 23.11.2022.
 //
