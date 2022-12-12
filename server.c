@@ -120,7 +120,7 @@ void inserare_msj(void *arg, char username[20], char destinatar[20]){
                        "In caz doriti sa parasiti mesageria scrieti"
                        " comanda \"optiuni\" \n";
 
-    char *mesaj_nou[1024];
+    char mesaj_nou[1024];
     bzero(mesaj_nou, 1024);
 
     if(write(tdL.cl, mesaj, 1024) <= 0){

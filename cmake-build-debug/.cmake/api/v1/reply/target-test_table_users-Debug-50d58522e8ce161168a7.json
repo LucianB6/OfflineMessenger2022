@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "server"
+			"path" : "test_table_users"
 		}
 	],
 	"backtrace" : 1,
@@ -25,13 +25,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 6,
+				"line" : 13,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 17,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g -fdiagnostics-color=always"
 				},
 				{
 					"fragment" : "-std=gnu99"
@@ -63,7 +63,7 @@
 			]
 		}
 	],
-	"id" : "server::@6890427a1f51a3e7e1df",
+	"id" : "test_table_users::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -78,19 +78,14 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-lpthread",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
 				"fragment" : "-lsqlite3",
 				"role" : "libraries"
 			}
 		],
 		"language" : "C"
 	},
-	"name" : "server",
-	"nameOnDisk" : "server",
+	"name" : "test_table_users",
+	"nameOnDisk" : "test_table_users",
 	"paths" : 
 	{
 		"build" : ".",
@@ -111,7 +106,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "server.c",
+			"path" : "users.c",
 			"sourceGroupIndex" : 0
 		}
 	],

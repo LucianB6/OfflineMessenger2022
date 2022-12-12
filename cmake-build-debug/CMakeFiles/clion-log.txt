@@ -1,4 +1,0 @@
-/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/ninja/linux/ninja -G Ninja /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022
--- Configuring done
--- Generating done
--- Build files have been written to: /home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug

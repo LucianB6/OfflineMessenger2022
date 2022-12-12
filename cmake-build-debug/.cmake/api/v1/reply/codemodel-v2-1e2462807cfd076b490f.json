@@ -45,28 +45,28 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "client::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-client-Debug-796cb319ce3e071c447a.json",
+					"jsonFile" : "target-client-Debug-f4c26dac9d01ef069dd0.json",
 					"name" : "client",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-Debug-0da086ec6b92ad8b2961.json",
+					"jsonFile" : "target-server-Debug-40e729f9628af6e8f51f.json",
 					"name" : "server",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "test_table_mess::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-test_table_mess-Debug-6c6a262463de6c792ced.json",
+					"jsonFile" : "target-test_table_mess-Debug-ef803e4ad9bc843b1736.json",
 					"name" : "test_table_mess",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "test_table_users::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-test_table_users-Debug-e434d26a037eb6c41c61.json",
+					"jsonFile" : "target-test_table_users-Debug-50d58522e8ce161168a7.json",
 					"name" : "test_table_users",
 					"projectIndex" : 0
 				}
@@ -82,6 +82,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 3
+		"minor" : 4
 	}
 }

@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "21"
+			"value" : "24"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -91,7 +91,19 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : "2"
+		},
+		{
+			"name" : "CMAKE_COLOR_DIAGNOSTICS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable colored diagnostics throughout."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -103,7 +115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cmake"
+			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/cmake/linux/bin/cmake"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -115,7 +127,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/cpack"
+			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/cmake/linux/bin/cpack"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -127,7 +139,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/bin/ctest"
+			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/cmake/linux/bin/ctest"
 		},
 		{
 			"name" : "CMAKE_C_COMPILER",
@@ -394,6 +406,18 @@
 			"value" : ""
 		},
 		{
+			"name" : "CMAKE_FIND_PACKAGE_REDIRECTS_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake."
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022/cmake-build-debug/CMakeFiles/pkgRedirects"
+		},
+		{
 			"name" : "CMAKE_GENERATOR",
 			"properties" : 
 			[
@@ -503,7 +527,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/ninja/linux/ninja"
+			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/ninja/linux/ninja"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -735,7 +759,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/cmake/linux/share/cmake-3.21"
+			"value" : "/home/lucian/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/cmake/linux/share/cmake-3.24"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1008,6 +1032,18 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/lucian/CLionProjects/ProiectRetele2022/OfflineMessenger2022"
+		},
+		{
+			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "linker supports push/pop state"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "TRUE"
 		}
 	],
 	"kind" : "cache",
