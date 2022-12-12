@@ -14,8 +14,35 @@ extern int errno;
 int port;
 //
 
+void inserare_mesaj(int);
+void trimitere_mesaj(int);
+void optiuni_pentru_utilizator(int);
+void vizualizare_mesaj(int);
+
+
 void inserare_mesaj(int sd){
-    printf("Am ajuns\n");
+    char mesaj[1024];
+    char mesaj_nou[1024];
+    bzero(mesaj_nou, 1024);
+
+    if(read(sd, mesaj, 1024) <= 0){
+        perror("[client] Eroare in read in inserare");
+    }
+    printf("%s", mesaj);
+    char iesire[24] = "optiuni";
+
+    while (read(0, mesaj_nou, 1024)){
+        mesaj_nou[strlen(mesaj_nou) - 1] = '\0';
+
+        fflush(stdout);
+        write(sd, mesaj_nou, 1024);
+
+        if(strcmp(iesire, mesaj_nou) == 0){
+            printf("Ve-ti fi redirectionat in meniul de optiuni!\n");
+            optiuni_pentru_utilizator(sd);
+        }
+
+    }
 }
 
 void trimitere_mesaj(int sd) {
@@ -27,6 +54,7 @@ void trimitere_mesaj(int sd) {
         perror("[client] Eroare la read in optiuni");
     }
     printf("%s \n", utilizator_trimitere);
+
     char confirmare[10] = "Da";
 
     while (read(0, utilizator, 100)) {
@@ -38,31 +66,62 @@ void trimitere_mesaj(int sd) {
         if (read(sd, aprobare, 10) <= 0) {
             perror("Eroare la read");
         }
-        confirmare[strlen(confirmare) - 1] = '\0';
-        printf("%s", confirmare);
+
         if (strcmp(confirmare, aprobare) == 0) {
-            printf("A-ti inserat numele corect");
+            printf("A-ti inserat numele corect\n");
+            inserare_mesaj(sd);
         }
     }
 }
 
+void vizualizare_mesaj(int sd){
+    char mesaje_nevazute[10000];
+    char optiune_noua[24];
+
+    if(read(sd, mesaje_nevazute, 10000) < 0){
+        perror("[client]Eroare la mesaj nevazut in read");
+    }
+    if(strcmp(mesaje_nevazute, "") == 0){
+        printf("Nu aveti nici un mesaj nevazut!\n"
+               "Introduce-ti comanda \"mesaj\" pentru a trimite\n");
+    } else {
+        printf("%s", mesaje_nevazute);
+    }
+    char optiune[24] = "mesaj";
+
+    while (read(0, optiune_noua, 24)){
+        optiune_noua[strlen(optiune_noua) - 1] = '\0';
+
+        fflush(stdout);
+
+        write(sd, optiune_noua, 24);
+
+        if(strcmp(optiune_noua, optiune) == 0){
+            printf("Ati selectat sa trimite-ti mesaj nou \n");
+            trimitere_mesaj(sd);
+        }
+    }
+
+}
 void optiuni_pentru_utilizator(int sd) {
     char optiuni[1024];
-    char optiune_dorita[5];
+    char optiune_dorita[10];
+    char nr[10] = "3";
 
     if (read(sd, optiuni, 1024) <= 0) {
         perror("[client] Eroare la read in optiuni");
     }
     printf("%s \n", optiuni);
 
-    while (read(0, optiune_dorita, 5)) {
+    while (read(0, optiune_dorita, 10)) {
         optiune_dorita[strlen(optiune_dorita) - 1] = '\0';
 
         fflush(stdout);
-        write(sd, optiune_dorita, 5);
+        write(sd, optiune_dorita, 10);
 
         if (strcmp(optiune_dorita, "1") == 0) {
             printf("Ati selectat %s: vizualizare mesaje \n", optiune_dorita);
+            vizualizare_mesaj(sd);
         }
         else if (strcmp(optiune_dorita, "2") == 0) {
             printf("Ati selectat %s: vizualizare oameni activi \n", optiune_dorita);
@@ -73,8 +132,9 @@ void optiuni_pentru_utilizator(int sd) {
         }
         else if (strcmp(optiune_dorita, "4") == 0){
             printf("Ati selectat %s: iesire din aplicatie\n", optiune_dorita);
-            exit(1);
-        } else printf("Optiunea nu este disponibila!\n");
+            close(sd);
+        } else
+            printf("Optiunea nu este disponibila!\n");
     }
 }
 void creare_cont(int sd){
