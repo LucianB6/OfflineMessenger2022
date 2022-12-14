@@ -42,7 +42,7 @@ void inserare_mesaj(int sd){
             printf("Ve-ti fi redirectionat in meniul de optiuni!\n");
             optiuni_pentru_utilizator(sd);
         }
-        mesaj_nou[0] = '\0';
+        bzero(mesaj_nou, 1024);
 
     }
 }

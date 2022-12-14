@@ -366,7 +366,7 @@ void creare_cont(void * arg){
     char password[30];
     char user_command[256] = "..Introduce-ti un nume de utilizator..";
     char password_command[256] = "..Introduce-ti o parola de utilizator..";
-    char aver = "1";
+    char aver[1] = "1";
 
     bzero(username, 20);
     bzero(password, 30);
